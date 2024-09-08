@@ -31,5 +31,21 @@ function changeBackgroundColor() {
     div.style.backgroundColor = getRandomBrightColor();
 }
 
-// Ganti warna setiap 2 detik
 setInterval(changeBackgroundColor, 5000);
+
+// AUTOSCROLL
+const container = document.getElementById('scroll-container');
+let scrollSpeed = 1;
+
+function scrollImages() {
+    container.scrollLeft += scrollSpeed;
+
+    // Jika scroll mencapai setengah dari total lebar konten, reset scrollLeft ke 0
+    if (container.scrollLeft >= container.scrollWidth / 2) {
+        container.scrollLeft = 0;
+    }
+
+    requestAnimationFrame(scrollImages);
+}
+
+scrollImages();
