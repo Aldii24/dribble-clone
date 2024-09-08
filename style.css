@@ -25,6 +25,14 @@ body {
     font-family: 'Merriweather', sans-serif;
 }
 
+.next-design {
+    font-family: 'Merriweather', sans-serif;
+}
+
+.container-design {
+    background-color: #FFDA79;
+}
+
 #random-bg {
     transition: background-color 5s linear;
     -webkit-transition: background-color 5s linear;
