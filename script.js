@@ -40,7 +40,6 @@ let scrollSpeed = 1;
 function scrollImages() {
     container.scrollLeft += scrollSpeed;
 
-    // Jika scroll mencapai setengah dari total lebar konten, reset scrollLeft ke 0
     if (container.scrollLeft >= container.scrollWidth / 2) {
         container.scrollLeft = 0;
     }
@@ -49,3 +48,49 @@ function scrollImages() {
 }
 
 scrollImages();
+
+
+
+// AUTOSCTOLL POPULAR
+const popular = document.getElementById('popular');
+const content = popular.innerHTML; // Clone konten
+popular.innerHTML += content;
+
+let scrollAmount = 0;
+const scrollSpeedPopular = 1;
+let isScrolling = true; // Status untuk menentukan apakah auto scroll berjalan
+let scrollTimeout;
+
+// Fungsi untuk auto scroll
+function autoScroll() {
+    if (isScrolling) {
+        scrollAmount += scrollSpeedPopular;
+
+        if (scrollAmount >= popular.scrollWidth / 2) {
+            scrollAmount = 0;
+        }
+
+        popular.scrollLeft = scrollAmount;
+    }
+
+    requestAnimationFrame(autoScroll);
+}
+
+// Event listener untuk menghentikan scroll saat di-hover
+popular.addEventListener('mouseenter', () => {
+    clearTimeout(scrollTimeout); // Bersihkan timeout sebelumnya
+    scrollTimeout = setTimeout(() => {
+        isScrolling = false; // Beri jeda kecil sebelum menghentikan scroll
+    }, 100);
+});
+
+// Event listener untuk melanjutkan scroll saat hover dihapus
+popular.addEventListener('mouseleave', () => {
+    clearTimeout(scrollTimeout); // Bersihkan timeout sebelumnya
+    scrollTimeout = setTimeout(() => {
+        isScrolling = true; // Beri jeda kecil sebelum melanjutkan scroll
+    }, 100); // Timeout 100ms agar lebih smooth
+});
+
+// Memulai auto scroll
+autoScroll();
